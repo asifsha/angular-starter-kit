@@ -1,6 +1,43 @@
-<h2>LOGIN</h2>
+<!-- <h2>LOGIN</h2>
 <p>{{message}}</p>
 <p>
   <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
   <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-</p>
+</p> -->
+
+<ngb-alert *ngIf="showError" (close)="showError = true" >
+  {{errorMessage}}
+</ngb-alert>
+
+<div class="container">
+  <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        required
+        [(ngModel)]="form.user"
+        name="name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="pwd"
+        required
+        [(ngModel)]="form.password"
+        name="password"
+      />
+    </div>
+    <div class="form-group form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" /> Remember me
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
