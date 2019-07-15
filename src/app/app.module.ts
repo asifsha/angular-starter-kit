@@ -8,8 +8,8 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { ItemsComponent } from "./components/items/items.component";
 import { LoginComponent } from "./modules/auth/components/login/login.component";
 import { FormsModule } from '@angular/forms';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ApiServiceComponent } from './services/api-service/api-service.component';
+import { AboutComponent } from './components/about/about.component';
+
 
 @NgModule({
   declarations: [
@@ -17,8 +17,7 @@ import { ApiServiceComponent } from './services/api-service/api-service.componen
     PageNotFoundComponent,
     ItemsComponent,
     LoginComponent,
-    DashboardComponent,
-    ApiServiceComponent
+    AboutComponent,    
   ],
   imports: [BrowserModule, AppRoutingModule,FormsModule, NgbModule],
   providers: [],

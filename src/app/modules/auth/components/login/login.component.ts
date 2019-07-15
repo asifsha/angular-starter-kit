@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       if (this.authService.isLoggedIn) {
         let redirect = this.authService.redirectUrl
           ? this.router.parseUrl(this.authService.redirectUrl)
-          : "/dashboard";
+          : "/items";
 
         // let navigationExtras: NavigationExtras = {
         //   queryParamsHandling: "preserve",
