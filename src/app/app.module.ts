@@ -9,6 +9,8 @@ import { ItemsComponent } from "./components/items/items.component";
 import { LoginComponent } from "./modules/auth/components/login/login.component";
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './components/about/about.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -17,9 +19,10 @@ import { AboutComponent } from './components/about/about.component';
     PageNotFoundComponent,
     ItemsComponent,
     LoginComponent,
-    AboutComponent,    
+    AboutComponent,
+    SideMenuComponent,    
   ],
-  imports: [BrowserModule, AppRoutingModule,FormsModule, NgbModule],
+  imports: [BrowserModule, AppRoutingModule,FormsModule, NgbModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -7,14 +7,13 @@
   <a routerLink="/items" routerLinkActive="active">Items</a>
   <a routerLink="/about" routerLinkActive="active">About</a>  
 </nav> -->
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">   
-    <ul class="nav navbar-nav">
-     
-      <a routerLink="/items" routerLinkActive="active">Items</a>
-      <a routerLink="/about" routerLinkActive="active">About</a> 
-    </ul>
-  </div>
-</nav>
+
+
 </div>
+<button (click)="toggleMenu()" class="hamburger">
+  <span>toggle menu</span>
+</button>
+
+
+<app-side-menu [@slideInOut]="menuState" (onMenuClicked)="toggleMenu()"></app-side-menu>
 <router-outlet></router-outlet>
