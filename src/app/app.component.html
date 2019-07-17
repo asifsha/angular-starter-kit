@@ -1,8 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div >
-  <h1 style="text-align:center">
+  <!-- <h1 style="text-align:center">
     Welcome to {{ title }}!
-  </h1>   
+  </h1>    -->
 <!-- <nav>
   <a routerLink="/items" routerLinkActive="active">Items</a>
   <a routerLink="/about" routerLinkActive="active">About</a>  
@@ -10,10 +10,10 @@
 
 
 </div>
-<button (click)="toggleMenu()" class="hamburger">
-  <span>toggle menu</span>
-</button>
 
+<button class="btn btn-primary" (click)="toggleMenu()">
+  ---
+</button>
 
 <app-side-menu [@slideInOut]="menuState" (onMenuClicked)="toggleMenu()"></app-side-menu>
 <router-outlet></router-outlet>
