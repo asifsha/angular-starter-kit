@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './components/about/about.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AboutComponent,
     SideMenuComponent,    
   ],
-  imports: [BrowserModule, AppRoutingModule,FormsModule, NgbModule, BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule,FormsModule, NgbModule, BrowserAnimationsModule,
+    AgGridModule.withComponents([])],
   providers: [],
   bootstrap: [AppComponent]
 })
