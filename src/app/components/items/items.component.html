@@ -1,17 +1,28 @@
 <div class="container">
-        <h1><span class="badge badge-secondary">Items</span></h1>
-  <div class="btn-group" role="group" aria-label="Basic example" style="padding-bottom:10px">
-    <button type="button" class="btn btn-secondary">Add</button>
-    <button type="button" class="btn btn-secondary">Edit</button>
-    <button type="button" class="btn btn-secondary">Delete</button>
+  <h1><span class="badge badge-secondary">Items</span></h1>
+  <div
+    class="btn-group"
+    role="group"
+    aria-label="Basic example"
+    style="padding-bottom:10px"
+  >
+    <button type="button" class="btn btn-secondary" (click)="onAdd()">
+      Add
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="onEdit()">
+      Edit
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="onDelete()">
+      Delete
+    </button>
   </div>
 
-  <ag-grid-angular 
-    style="width: 500px; height: 500px;" 
+  <ag-grid-angular
+    style="width: 500px; height: 500px;"
     class="ag-theme-balham"
-    [rowData]="rowData" 
+    [rowData]="rowData"
     [columnDefs]="columnDefs"
-    >
-</ag-grid-angular>
+    [rowSelection]="single"
+  >
+  </ag-grid-angular>
 </div>
-
