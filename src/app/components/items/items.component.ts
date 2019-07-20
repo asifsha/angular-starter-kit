@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ItemDetailsComponent } from '../item-details/item-details.component';
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ItemDetailsComponent } from "../item-details/item-details.component";
+import { ApiService } from "src/app/services/api.service";
 
 @Component({
   selector: "app-items",
@@ -10,39 +11,63 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 export class ItemsComponent implements OnInit {
   columnDefs = [
     {
-      headerName: "Make",
-      field: "make",
+      headerName: "id",
+      field: "id",
+      hide: true
+    },
+    {
+      headerName: "Name",
+      field: "name",
       checkboxSelection: true,
       headerCheckboxSelection: true
     },
-    { headerName: "Model", field: "model" },
-    { headerName: "Price", field: "price" }
+    { headerName: "Date", field: "date" },
+    { headerName: "Price", field: "price" },
+    { headerName: "InStock", field: "inStock" },
+    { headerName: "Type", field: "type" }
   ];
 
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 }
-  ];
+  rowData;
+  //   { make: "Toyota", model: "Celica", price: 35000 },
+  //   { make: "Ford", model: "Mondeo", price: 32000 },
+  //   { make: "Porsche", model: "Boxter", price: 72000 }
+  // ];
 
-  constructor(private modalService: NgbModal) {}
+  gridApi;
 
-  ngOnInit() {}
+  constructor(private modalService: NgbModal, private apiService: ApiService) {}
 
-  onAdd(){
-    this.showItemDetails();
+  ngOnInit() {
+    this.loadData();
   }
 
-  onEdit(){
-
+  onGridReady(params) {
+    this.gridApi = params.api;
   }
 
-  onDelete(){
-
+  async loadData() {
+    this.rowData = await this.apiService.getAllItems();
+    console.log(this.rowData);
   }
 
-  showItemDetails(){
+  onAdd() {
+    this.showItemDetails(-1);
+  }
+
+  onEdit() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    console.log(selectedRows);
+    if (selectedRows.length === 0) {
+      return;
+    }
+
+    this.showItemDetails(selectedRows[0].itemId);
+  }
+
+  onDelete() {}
+
+  showItemDetails(itemId) {
     const modalRef = this.modalService.open(ItemDetailsComponent);
-    modalRef.componentInstance.name = 'Details';
+    modalRef.componentInstance.itemId = itemId;
   }
 }

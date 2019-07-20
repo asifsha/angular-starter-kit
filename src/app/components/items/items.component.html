@@ -18,11 +18,12 @@
   </div>
 
   <ag-grid-angular
-    style="width: 500px; height: 500px;"
+    style="width: 900px; height: 400px;"
     class="ag-theme-balham"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
     [rowSelection]="single"
+    (gridReady)="onGridReady($event)"
   >
   </ag-grid-angular>
 </div>

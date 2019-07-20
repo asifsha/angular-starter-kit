@@ -6,6 +6,14 @@ import { Injectable } from "@angular/core";
 export class ApiService {
   constructor() {}
 
+  items = [
+    { itemId: 1, name: 'Pen', date: '2008-12-10', price: 50, inStock: true, type: 1 },
+    { itemId: 2, name: 'Pencil', date: '2018-03-04', price: 30, inStock: true, type: 1 },
+    { itemId: 3, name: 'Macbook', date: '2018-10-10', price: 1500, inStock: true, type:2 },
+    { itemId: 4, name: 'Table', date: '2016-03-03', price: 150, inStock: false, type: 3 },
+    { itemId: 5, name: 'Bulb', date: '2015-03-02', price: 100, inStock: false, type: 4 }
+  ];
+
   getUserInfo(userId) {
     let userInfo = {
       userId: 101,
@@ -87,12 +95,53 @@ export class ApiService {
           comments: "Fine place, fair charges!",
           totalAmount: 150,
           order: 5
-        },
+        }
       ]
     };
 
     return new Promise((resolve, reject) => {
       resolve();
+    });
+  }
+
+  getAllItems() {
+    return new Promise((resolve, reject) => {
+      resolve(this.items);
+    });
+  }
+
+  getItem(itemId) {
+    return new Promise((resolve, reject) => {
+      const item = this.items.find(i => i.itemId === itemId);
+      resolve(item);
+    });
+  }
+
+  saveItem(itemRecord) {
+    return new Promise((resolve, reject) => {
+      if (itemRecord.itemId === -1) {
+        const id = Math.max.apply(
+          Math,
+          this.items.map(function(i) {
+            return i.itemId;
+          })
+        );
+        itemRecord.itemId = id + 1;
+        this.items.push(itemRecord);
+      } else {
+        let index = this.items.findIndex(i => i.itemId === itemRecord.itemId);
+        this.items[index] = Object.assign({}, itemRecord);
+      }
+
+      resolve(itemRecord);
+    });
+  }
+
+  deleteItem(itemId) {
+    return new Promise((resolve, reject) => {
+      let index = this.items.findIndex(i => i.itemId === itemId);
+      this.items.splice(index, 1);
+      resolve(true);
     });
   }
 }
