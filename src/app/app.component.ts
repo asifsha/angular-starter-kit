@@ -37,6 +37,8 @@ export class AppComponent {
 
   menuState: string = "out";
 
+  alertMessage: string= 'no message';
+
   toggleMenu() {
     this.menuState = this.menuState === "out" ? "in" : "out";
   }

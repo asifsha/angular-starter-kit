@@ -1,1 +1,53 @@
-<p>item-details works! {{name}}</p>
+<div>
+        <!-- <Form >
+            <FormGroup row >
+                <Col sm={1} className="col-form-label text-right ">
+                    <label name="lblname" label="Name" >
+                </Col>
+                <Col sm={2}>
+                    <input name="txtName" value={this.state.item.name} onChange={this.handleChange} error={this.state.IsNameValid} />
+                </Col>
+                <Col sm={1} className="col-form-label text-right ">
+                    <label name="lblPrice" label="Price($)" >
+                </Col>
+                <Col sm={2}>
+                    <input name="txtPrice" value={this.state.item.price} onChange={this.handleNumberChange} error={this.state.IsPriceValid} />
+                </Col>
+            </FormGroup>
+            <FormGroup row >
+                <Col sm={1} className="col-form-label text-right ">
+                    <label name="instock" label="In Stock" >
+                </Col>
+                <Col sm={2}>
+                    <ToggleInput data="{[{ 'id': 1, 'name': 'Yes' }, { 'id': 2, 'name': 'No' }]}" valueField='id' textField='name' onChange={this.handleinStockChange} />
+                </Col>
+                <Col sm={1} className="col-form-label text-right ">
+                    <label name="lblType" label="Type" >
+                </Col>
+                <Col sm={2}>
+                    <select data={this.props.itemTypes} valueField='id' textField='name' onChange={this.handleTypeChange}/>
+                </Col>
+            </FormGroup>
+            <FormGroup row>
+                <Col sm={1} className="col-form-label text-right ">
+                    <label name="lblDate" label="Date" >
+                </Col>
+                <Col sm={2}>
+                    <DateInput name="dpDate" onChange={this.handleDateChange} />                                
+                </Col>
+            </FormGroup>
+        </Form> -->
+        <mat-form-field>
+                <input matInput placeholder="Input">
+              </mat-form-field>
+            
+              <mat-form-field>
+                <textarea matInput placeholder="Textarea"></textarea>
+              </mat-form-field>
+            
+              <mat-form-field>
+                <mat-select placeholder="Select">
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+</div>

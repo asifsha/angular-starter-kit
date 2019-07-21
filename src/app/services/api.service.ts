@@ -117,6 +117,13 @@ export class ApiService {
     });
   }
 
+  getNewItem() {
+    return new Promise((resolve, reject) => {
+      const item = { itemId: -1, name: '', date: '', price: 0, inStock: false, type: 0 };
+      resolve(item);
+    });
+  }
+
   saveItem(itemRecord) {
     return new Promise((resolve, reject) => {
       if (itemRecord.itemId === -1) {

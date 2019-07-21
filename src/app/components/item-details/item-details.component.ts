@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, AfterContentInit } from "@angular/core";
-import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit, Input, AfterContentInit, Inject } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: "app-item-details",
@@ -8,20 +8,24 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ["./item-details.component.less"]
 })
 export class ItemDetailsComponent implements OnInit {
-  @Input() itemId;
-
+  
   item;
   constructor(
-    public activeModal: NgbActiveModal,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService
   ) {}
 
   ngOnInit() {
-    console.log(this.itemId);
+    console.log(this.data);
+    
     this.loadData();
   }
 
   async loadData() {
-    this.item = await this.apiService.getItem(this.itemId);
+    if (this.data.itemId === -1) {
+      this.item = await this.apiService.getNewItem();
+    } else {
+      this.item = await this.apiService.getItem(this.data.itemId);
+    }
   }
 }

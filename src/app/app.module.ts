@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {MatButtonModule, MatCheckboxModule, MatFormFieldModule,
+MatOptionModule, MatSelectModule, MatDialogModule} from '@angular/material';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -28,8 +29,13 @@ import { ItemDetailsComponent } from "./components/item-details/item-details.com
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule,
     BrowserAnimationsModule,
+    MatButtonModule, 
+    MatCheckboxModule,
+    MatFormFieldModule,    
+    MatOptionModule,
+    MatSelectModule,
+    MatDialogModule,
     AgGridModule.withComponents([])
   ],
   providers: [],

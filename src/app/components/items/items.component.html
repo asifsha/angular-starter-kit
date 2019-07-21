@@ -1,18 +1,14 @@
 <div class="container">
-  <h1><span class="badge badge-secondary">Items</span></h1>
-  <div
-    class="btn-group"
-    role="group"
-    aria-label="Basic example"
-    style="padding-bottom:10px"
-  >
-    <button type="button" class="btn btn-secondary" (click)="onAdd()">
+  <h1><span style="background-color:bisque">Items</span></h1>
+ 
+  <div>
+    <button mat-button color="accent" (click)="onAdd()">
       Add
     </button>
-    <button type="button" class="btn btn-secondary" (click)="onEdit()">
+    <button mat-button color="primary" (click)="onEdit()">
       Edit
     </button>
-    <button type="button" class="btn btn-secondary" (click)="onDelete()">
+    <button mat-button color="primary" (click)="onDelete()">
       Delete
     </button>
   </div>

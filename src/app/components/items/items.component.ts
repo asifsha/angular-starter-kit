@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ItemDetailsComponent } from "../item-details/item-details.component";
 import { ApiService } from "src/app/services/api.service";
+import { MatDialog } from "@angular/material";
 
 @Component({
   selector: "app-items",
@@ -28,14 +28,14 @@ export class ItemsComponent implements OnInit {
   ];
 
   rowData;
-  //   { make: "Toyota", model: "Celica", price: 35000 },
-  //   { make: "Ford", model: "Mondeo", price: 32000 },
-  //   { make: "Porsche", model: "Boxter", price: 72000 }
-  // ];
 
   gridApi;
 
-  constructor(private modalService: NgbModal, private apiService: ApiService) {}
+  showAlert: boolean = false;
+
+  alertMessage: string;
+
+  constructor(public dialog: MatDialog, private apiService: ApiService) {}
 
   ngOnInit() {
     this.loadData();
@@ -45,19 +45,28 @@ export class ItemsComponent implements OnInit {
     this.gridApi = params.api;
   }
 
+  hideToast() {
+    console.log("in hiding");
+    //this.showToast=false;
+  }
   async loadData() {
     this.rowData = await this.apiService.getAllItems();
     console.log(this.rowData);
   }
 
   onAdd() {
+    this.showAlert = false;
     this.showItemDetails(-1);
   }
 
   onEdit() {
+    this.showAlert = false;
     const selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
     if (selectedRows.length === 0) {
+      this.showAlert = true;
+      this.alertMessage =
+        "Please select a single record to perform this operation.";
       return;
     }
 
@@ -67,7 +76,24 @@ export class ItemsComponent implements OnInit {
   onDelete() {}
 
   showItemDetails(itemId) {
-    const modalRef = this.modalService.open(ItemDetailsComponent);
-    modalRef.componentInstance.itemId = itemId;
+   this.dialog.open(ItemDetailsComponent, {
+      data: {
+        itemId: itemId
+      }
+    });  
   }
+
+  // showSuccess() {
+  //   this.toastService.show("I am a success toast", {
+  //     classname: "bg-success text-light",
+  //     delay: 10000
+  //   });
+  // }
+
+  // showDanger(dangerTpl) {
+  //   this.toastService.show(dangerTpl, {
+  //     classname: "bg-danger text-light",
+  //     delay: 15000
+  //   });
+  // }
 }
