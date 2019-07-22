@@ -7,13 +7,62 @@ export class ApiService {
   constructor() {}
 
   items = [
-    { itemId: 1, name: 'Pen', date: '2008-12-10', price: 50, inStock: true, type: 1 },
-    { itemId: 2, name: 'Pencil', date: '2018-03-04', price: 30, inStock: true, type: 1 },
-    { itemId: 3, name: 'Macbook', date: '2018-10-10', price: 1500, inStock: true, type:2 },
-    { itemId: 4, name: 'Table', date: '2016-03-03', price: 150, inStock: false, type: 3 },
-    { itemId: 5, name: 'Bulb', date: '2015-03-02', price: 100, inStock: false, type: 4 }
+    {
+      itemId: 1,
+      name: "Pen",
+      date: "2008-12-10",
+      price: 50,
+      inStock: true,
+      type: 1
+    },
+    {
+      itemId: 2,
+      name: "Pencil",
+      date: "2018-03-04",
+      price: 30,
+      inStock: true,
+      type: 1
+    },
+    {
+      itemId: 3,
+      name: "Macbook",
+      date: "2018-10-10",
+      price: 1500,
+      inStock: true,
+      type: 2
+    },
+    {
+      itemId: 4,
+      name: "Table",
+      date: "2016-03-03",
+      price: 150,
+      inStock: false,
+      type: 3
+    },
+    {
+      itemId: 5,
+      name: "Bulb",
+      date: "2015-03-02",
+      price: 100,
+      inStock: false,
+      type: 4
+    }
   ];
 
+  itemTypes = [
+    {
+      id: 1,
+      name: "Electronics"
+    },
+    {
+      id: 2,
+      name: "Office Accessories"
+    },
+    {
+      id: 3,
+      name: "Household"
+    }
+  ];
   getUserInfo(userId) {
     let userInfo = {
       userId: 101,
@@ -119,7 +168,14 @@ export class ApiService {
 
   getNewItem() {
     return new Promise((resolve, reject) => {
-      const item = { itemId: -1, name: '', date: '', price: 0, inStock: false, type: 0 };
+      const item = {
+        itemId: -1,
+        name: "",
+        date: "",
+        price: 0,
+        inStock: false,
+        type: 0
+      };
       resolve(item);
     });
   }
@@ -149,6 +205,12 @@ export class ApiService {
       let index = this.items.findIndex(i => i.itemId === itemId);
       this.items.splice(index, 1);
       resolve(true);
+    });
+  }
+
+  getItemTypes() {
+    return new Promise((resolve, reject) => {     
+      resolve(this.itemTypes);
     });
   }
 }

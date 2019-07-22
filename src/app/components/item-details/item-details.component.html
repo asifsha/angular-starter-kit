@@ -1,5 +1,5 @@
 <div>
-        <!-- <Form >
+  <!-- <Form >
             <FormGroup row >
                 <Col sm={1} className="col-form-label text-right ">
                     <label name="lblname" label="Name" >
@@ -37,17 +37,42 @@
                 </Col>
             </FormGroup>
         </Form> -->
-        <mat-form-field>
-                <input matInput placeholder="Input">
-              </mat-form-field>
-            
-              <mat-form-field>
-                <textarea matInput placeholder="Textarea"></textarea>
-              </mat-form-field>
-            
-              <mat-form-field>
-                <mat-select placeholder="Select">
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-              </mat-form-field>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Name" [(value)]="item.name" />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="Price"
+        type="number"
+        [(value)]="item.price"
+      />
+    </mat-form-field>
+
+    <mat-slide-toggle [checked]="item.inStock">In Stock</mat-slide-toggle>
+    <br />
+    <mat-form-field class="example-full-width">
+      <mat-label>Select a Type</mat-label>
+      <mat-select [(value)]="item.type">
+        <mat-option *ngFor="let itemType of itemTypes" value="itemType.id">{{
+          itemType.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br />
+    <button mat-button color="accent" (click)="onSave()">
+      Save
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">
+      Cancel
+    </button>
+  </form>
 </div>
