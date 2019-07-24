@@ -61,6 +61,10 @@ export class ApiService {
     {
       id: 3,
       name: "Household"
+    },
+    {
+      id: 4,
+      name: "Other"
     }
   ];
   getUserInfo(userId) {
