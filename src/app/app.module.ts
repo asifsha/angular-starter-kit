@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import {MatButtonModule, MatCheckboxModule, MatFormFieldModule,
-MatOptionModule, MatSelectModule, MatDialogModule, MatIconModule, MatChipsModule, MatInputModule, MatSlideToggle, MatSlideToggleModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule} from '@angular/material';
+MatOptionModule, MatSelectModule, MatDialogModule, MatIconModule, MatChipsModule, MatInputModule, MatSlideToggle, MatSlideToggleModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatSnackBarModule} from '@angular/material';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -44,6 +44,7 @@ import { ItemDetailsComponent } from "./components/item-details/item-details.com
     MatDatepickerModule,
     MatNativeDateModule,    
     MatAutocompleteModule,
+    MatSnackBarModule,
     AgGridModule.withComponents([])
   ],
   providers: [],

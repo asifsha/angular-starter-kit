@@ -1,78 +1,65 @@
 <div>
-  <!-- <Form >
-            <FormGroup row >
-                <Col sm={1} className="col-form-label text-right ">
-                    <label name="lblname" label="Name" >
-                </Col>
-                <Col sm={2}>
-                    <input name="txtName" value={this.state.item.name} onChange={this.handleChange} error={this.state.IsNameValid} />
-                </Col>
-                <Col sm={1} className="col-form-label text-right ">
-                    <label name="lblPrice" label="Price($)" >
-                </Col>
-                <Col sm={2}>
-                    <input name="txtPrice" value={this.state.item.price} onChange={this.handleNumberChange} error={this.state.IsPriceValid} />
-                </Col>
-            </FormGroup>
-            <FormGroup row >
-                <Col sm={1} className="col-form-label text-right ">
-                    <label name="instock" label="In Stock" >
-                </Col>
-                <Col sm={2}>
-                    <ToggleInput data="{[{ 'id': 1, 'name': 'Yes' }, { 'id': 2, 'name': 'No' }]}" valueField='id' textField='name' onChange={this.handleinStockChange} />
-                </Col>
-                <Col sm={1} className="col-form-label text-right ">
-                    <label name="lblType" label="Type" >
-                </Col>
-                <Col sm={2}>
-                    <select data={this.props.itemTypes} valueField='id' textField='name' onChange={this.handleTypeChange}/>
-                </Col>
-            </FormGroup>
-            <FormGroup row>
-                <Col sm={1} className="col-form-label text-right ">
-                    <label name="lblDate" label="Date" >
-                </Col>
-                <Col sm={2}>
-                    <DateInput name="dpDate" onChange={this.handleDateChange} />                                
-                </Col>
-            </FormGroup>
-        </Form> -->
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Name" [(value)]="item.name" />
-    </mat-form-field>
+  <h4 mat-dialog-title>{{ heading }}</h4>
+  <h1><span style="color:#ff4081; border:1px">{{item.name}}</span></h1>
+  <div mat-dialog-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="Name"
+          [(ngModel)]="item.name"
+          name="itemName"
+        />
+      </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input
-        matInput
-        placeholder="Price"
-        type="number"
-        [(value)]="item.price"
-      />
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="Price"
+          type="number"
+          [(ngModel)]="item.price"
+          name="price"
+        />
+      </mat-form-field>
 
-    <mat-slide-toggle [checked]="item.inStock">In Stock</mat-slide-toggle>
-    <br />
-    <mat-form-field class="example-full-width">
-      <mat-label>Select a Type</mat-label>
-      <mat-select [(value)]="item.type">
-        <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.id">{{
-          itemType.name
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-    <mat-form-field class="example-full-width">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="item.date" name="date"/>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <br />
-    <button mat-button color="accent" (click)="onSave()">
-      Save
-    </button>
-    <button mat-button color="primary" (click)="onCancel()">
+      <mat-slide-toggle [(ngModel)]="item.inStock" name="inStock"
+        >In Stock</mat-slide-toggle
+      >
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Select a Type</mat-label>
+        <mat-select [(value)]="item.type">
+          <mat-option
+            *ngFor="let itemType of itemTypes"
+            [value]="itemType.id"
+            >{{ itemType.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Choose a date"
+          [(ngModel)]="item.date"
+          name="date"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button color="accent" (click)="onSave()">Save</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data.animal"
+      cdkFocusInitial
+      color="primary"
+      (click)="onCancel()"
+    >
       Cancel
     </button>
-  </form>
+  </div>
 </div>

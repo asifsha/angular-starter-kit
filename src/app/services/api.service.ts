@@ -174,7 +174,7 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       const item = {
         itemId: -1,
-        name: "",
+        name: "New Item",
         date: "",
         price: 0,
         inStock: false,

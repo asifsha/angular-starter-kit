@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ItemDetailsComponent } from "../item-details/item-details.component";
 import { ApiService } from "src/app/services/api.service";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 
 @Component({
   selector: "app-items",
@@ -33,9 +33,14 @@ export class ItemsComponent implements OnInit {
 
   showAlert: boolean = false;
 
-  alertMessage: string;
+  pleaseSelectASingleRecordMessage: string =
+    "Please select a single record to perform this operation.";
 
-  constructor(public dialog: MatDialog, private apiService: ApiService) {}
+  constructor(
+    public dialog: MatDialog,
+    private apiService: ApiService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.loadData();
@@ -65,22 +70,33 @@ export class ItemsComponent implements OnInit {
     console.log(selectedRows);
     if (selectedRows.length === 0) {
       this.showAlert = true;
-      this.alertMessage =
-        "Please select a single record to perform this operation.";
+      this.openSnackBar(this.pleaseSelectASingleRecordMessage, undefined);
       return;
     }
 
     this.showItemDetails(selectedRows[0].itemId);
   }
 
-  onDelete() {}
+  onDelete() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    console.log(selectedRows);
+    if (selectedRows.length === 0) {
+      this.openSnackBar(this.pleaseSelectASingleRecordMessage, undefined);
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
 
   showItemDetails(itemId) {
-   this.dialog.open(ItemDetailsComponent, {
+    this.dialog.open(ItemDetailsComponent, {
       data: {
         itemId: itemId
       }
-    });  
+    });
   }
 
   // showSuccess() {

@@ -6,7 +6,7 @@ import {
   Inject
 } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
-import { MAT_DIALOG_DATA } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
   selector: "app-item-details",
@@ -16,16 +16,17 @@ import { MAT_DIALOG_DATA } from "@angular/material";
 export class ItemDetailsComponent implements OnInit {
   item;
   itemTypes;
+  heading;
   constructor(
+    public dialogRef: MatDialogRef<ItemDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService
   ) {
-
-    this.item= {
+    this.item = {
       date: "",
       inStock: false,
       itemId: -1,
-      name: "",
+      name: "New Item",
       price: 0,
       type: 0
     };
@@ -33,7 +34,7 @@ export class ItemDetailsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data);
-
+    this.heading = this.data.itemId === -1 ? "Add - Item" : "Edit Item";
     this.loadData();
   }
 
@@ -47,13 +48,10 @@ export class ItemDetailsComponent implements OnInit {
     this.itemTypes = await this.apiService.getItemTypes();
     console.log(this.item);
   }
-  onSave()
-  {
-console.log(this.item);
+  onSave() {
+    console.log(this.item);
+    this.dialogRef.close();
   }
 
-  onCancel()
-  {
-
-  }
+  onCancel() {}
 }
