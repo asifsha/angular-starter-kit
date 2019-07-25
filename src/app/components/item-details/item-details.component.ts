@@ -6,7 +6,8 @@ import {
   Inject
 } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from "@angular/material";
+import { CustomSnakebarComponent } from '../custom-snakebar/custom-snakebar.component';
 
 @Component({
   selector: "app-item-details",
@@ -20,15 +21,17 @@ export class ItemDetailsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ItemDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private snackBar: MatSnackBar
   ) {
     this.item = {
       date: "",
       inStock: false,
       itemId: -1,
-      name: "New Item",
+      name: "",
       price: 0,
-      type: 0
+      type: 0,
+      newName : "New Item"
     };
   }
 
@@ -50,8 +53,31 @@ export class ItemDetailsComponent implements OnInit {
   }
   onSave() {
     console.log(this.item);
-    this.dialogRef.close();
+    if (this.validateItem()) {
+      this.apiService.saveItem(this.item);
+      this.dialogRef.close();
+    }
+  }
+
+  validateItem() {
+    let message = "";
+    if (this.item.name === undefined || this.item.name === "") {
+      message = "Please enter name.";
+    }
+    if (this.item.type === undefined || this.item.type === 0) {
+      message += "<br> Please select a type.";
+    }
+    this.openSnackBar(message, undefined);
+
+    return message === "";
   }
 
   onCancel() {}
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.openFromComponent(CustomSnakebarComponent, {
+      duration: 5000,
+      data: { message : message},      
+    });
+  }
 }

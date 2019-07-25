@@ -31,8 +31,6 @@ export class ItemsComponent implements OnInit {
 
   gridApi;
 
-  showAlert: boolean = false;
-
   pleaseSelectASingleRecordMessage: string =
     "Please select a single record to perform this operation.";
 
@@ -50,26 +48,19 @@ export class ItemsComponent implements OnInit {
     this.gridApi = params.api;
   }
 
-  hideToast() {
-    console.log("in hiding");
-    //this.showToast=false;
-  }
   async loadData() {
     this.rowData = await this.apiService.getAllItems();
     console.log(this.rowData);
   }
 
   onAdd() {
-    this.showAlert = false;
     this.showItemDetails(-1);
   }
 
   onEdit() {
-    this.showAlert = false;
     const selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
     if (selectedRows.length === 0) {
-      this.showAlert = true;
       this.openSnackBar(this.pleaseSelectASingleRecordMessage, undefined);
       return;
     }
@@ -82,7 +73,10 @@ export class ItemsComponent implements OnInit {
     console.log(selectedRows);
     if (selectedRows.length === 0) {
       this.openSnackBar(this.pleaseSelectASingleRecordMessage, undefined);
+      return;
     }
+    this.apiService.deleteItem(selectedRows[0].itemId);
+    var res = this.gridApi.updateRowData({ remove: selectedRows });
   }
 
   openSnackBar(message: string, action: string) {

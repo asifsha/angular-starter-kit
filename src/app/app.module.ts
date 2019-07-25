@@ -1,7 +1,22 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import {MatButtonModule, MatCheckboxModule, MatFormFieldModule,
-MatOptionModule, MatSelectModule, MatDialogModule, MatIconModule, MatChipsModule, MatInputModule, MatSlideToggle, MatSlideToggleModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatSnackBarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatDialogModule,
+  MatIconModule,
+  MatChipsModule,
+  MatInputModule,
+  MatSlideToggle,
+  MatSlideToggleModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatAutocompleteModule,
+  MatSnackBarModule
+} from "@angular/material";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -14,6 +29,7 @@ import { SideMenuComponent } from "./components/side-menu/side-menu.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AgGridModule } from "ag-grid-angular";
 import { ItemDetailsComponent } from "./components/item-details/item-details.component";
+import { CustomSnakebarComponent } from "./components/custom-snakebar/custom-snakebar.component";
 
 @NgModule({
   declarations: [
@@ -23,16 +39,17 @@ import { ItemDetailsComponent } from "./components/item-details/item-details.com
     LoginComponent,
     AboutComponent,
     SideMenuComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    CustomSnakebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
-    MatFormFieldModule,    
+    MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
     MatDialogModule,
@@ -40,15 +57,15 @@ import { ItemDetailsComponent } from "./components/item-details/item-details.com
     MatChipsModule,
     MatInputModule,
     MatSlideToggleModule,
-    MatFormFieldModule,    
+    MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule,    
+    MatNativeDateModule,
     MatAutocompleteModule,
     MatSnackBarModule,
     AgGridModule.withComponents([])
   ],
   providers: [],
-  entryComponents: [ItemDetailsComponent],
+  entryComponents: [ItemDetailsComponent, CustomSnakebarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

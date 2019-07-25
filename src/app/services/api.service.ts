@@ -174,11 +174,12 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       const item = {
         itemId: -1,
-        name: "New Item",
+        name: "",
         date: "",
         price: 0,
         inStock: false,
-        type: 0
+        type: 0,
+        newName : "New Item"
       };
       resolve(item);
     });
@@ -208,6 +209,7 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       let index = this.items.findIndex(i => i.itemId === itemId);
       this.items.splice(index, 1);
+      console.log(this.items);
       resolve(true);
     });
   }
