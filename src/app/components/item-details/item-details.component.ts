@@ -38,8 +38,7 @@ export class ItemDetailsComponent implements OnInit {
     };
   }
 
-  ngOnInit() {
-    console.log(this.data);
+  ngOnInit() {    
     this.heading = this.data.itemId === -1 ? "Add - Item" : "Edit Item";
     this.loadData();
   }
@@ -51,11 +50,9 @@ export class ItemDetailsComponent implements OnInit {
       this.item = await this.apiService.getItem(this.data.itemId);
     }
 
-    this.itemTypes = await this.apiService.getItemTypes();
-    console.log(this.item);
+    this.itemTypes = await this.apiService.getItemTypes();   
   }
-  onSave() {
-    console.log(this.item);
+  onSave() {    
     if (this.validateItem()) {
       this.apiService.saveItem(this.item);
       this.itemSaved.emit(this.item);

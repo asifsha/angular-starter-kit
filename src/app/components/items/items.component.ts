@@ -41,9 +41,6 @@ export class ItemsComponent implements OnInit {
       headerName: "Type",
       field: "type",
       cellRenderer: data => {
-        console.log(data);
-        console.log(this.itemTypes);
-
         return data.value
           ? this.itemTypes.find(itemtype => itemtype.id == data.value).name
           : "";
@@ -76,8 +73,7 @@ export class ItemsComponent implements OnInit {
 
   async loadData() {
     this.rowData = await this.apiService.getAllItems();
-    this.itemTypes = await this.apiService.getItemTypes();
-    console.log(this.rowData);
+    this.itemTypes = await this.apiService.getItemTypes();    
   }
 
   onAdd() {
@@ -85,8 +81,7 @@ export class ItemsComponent implements OnInit {
   }
 
   onEdit() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    console.log(selectedRows);
+    const selectedRows = this.gridApi.getSelectedRows();    
     if (selectedRows.length === 0) {
       this.openSnackBar(this.pleaseSelectASingleRecordMessage, undefined);
       return;
@@ -96,8 +91,7 @@ export class ItemsComponent implements OnInit {
   }
 
   onDelete() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    console.log(selectedRows);
+    const selectedRows = this.gridApi.getSelectedRows();   
     if (selectedRows.length === 0) {
       this.openSnackBar(this.pleaseSelectASingleRecordMessage, undefined);
       return;
@@ -119,9 +113,7 @@ export class ItemsComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`); // Pizza!
-      console.log(result);
+    dialogRef.afterClosed().subscribe(result => {      
       if (result !== undefined) {
         if (result.mode === "add") {
           this.gridApi.updateRowData({ add: [result.item] });
@@ -130,19 +122,5 @@ export class ItemsComponent implements OnInit {
         }
       }
     });
-  }
-
-  // showSuccess() {
-  //   this.toastService.show("I am a success toast", {
-  //     classname: "bg-success text-light",
-  //     delay: 10000
-  //   });
-  // }
-
-  // showDanger(dangerTpl) {
-  //   this.toastService.show(dangerTpl, {
-  //     classname: "bg-danger text-light",
-  //     delay: 15000
-  //   });
-  // }
+  } 
 }

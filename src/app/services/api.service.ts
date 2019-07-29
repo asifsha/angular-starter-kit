@@ -179,7 +179,7 @@ export class ApiService {
         price: 0,
         inStock: false,
         type: 0,
-        newName : "New Item"
+        newName: "New Item"
       };
       resolve(item);
     });
@@ -201,8 +201,6 @@ export class ApiService {
         this.items[index] = Object.assign({}, itemRecord);
       }
 
-      console.log('items list');
-      console.log(this.items);
       resolve(itemRecord);
     });
   }
@@ -211,13 +209,12 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       let index = this.items.findIndex(i => i.itemId === itemId);
       this.items.splice(index, 1);
-      console.log(this.items);
       resolve(true);
     });
   }
 
   getItemTypes() {
-    return new Promise((resolve, reject) => {     
+    return new Promise((resolve, reject) => {
       resolve(this.itemTypes);
     });
   }

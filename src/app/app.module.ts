@@ -22,7 +22,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { ItemsComponent } from "./components/items/items.component";
-import { LoginComponent } from "./modules/auth/components/login/login.component";
 import { FormsModule } from "@angular/forms";
 import { AboutComponent } from "./components/about/about.component";
 import { SideMenuComponent } from "./components/side-menu/side-menu.component";
@@ -36,7 +35,6 @@ import { CustomSnakebarComponent } from "./components/custom-snakebar/custom-sna
     AppComponent,
     PageNotFoundComponent,
     ItemsComponent,
-    LoginComponent,
     AboutComponent,
     SideMenuComponent,
     ItemDetailsComponent,
