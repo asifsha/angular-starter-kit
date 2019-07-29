@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ItemDetailsComponent } from "../item-details/item-details.component";
 import { ApiService } from "src/app/services/api.service";
 import { MatDialog, MatSnackBar } from "@angular/material";
-import { __await } from 'tslib';
+import { __await } from "tslib";
 
 @Component({
   selector: "app-items",
@@ -30,15 +30,23 @@ export class ItemsComponent implements OnInit {
       }
     },
     { headerName: "Price", field: "price" },
-    { headerName: "InStock", field: "inStock" },
+    {
+      headerName: "In Stock",
+      field: "inStock",
+      cellRenderer: data => {
+        return data.value ? "Yes" : "No";
+      }
+    },
     {
       headerName: "Type",
       field: "type",
       cellRenderer: data => {
         console.log(data);
         console.log(this.itemTypes);
-        //let index=
-        return data.value ? this.itemTypes.find( itemtype=> itemtype.id == data.value).name : "";
+
+        return data.value
+          ? this.itemTypes.find(itemtype => itemtype.id == data.value).name
+          : "";
       }
     }
   ];
@@ -68,7 +76,7 @@ export class ItemsComponent implements OnInit {
 
   async loadData() {
     this.rowData = await this.apiService.getAllItems();
-    this.itemTypes= await this.apiService.getItemTypes();
+    this.itemTypes = await this.apiService.getItemTypes();
     console.log(this.rowData);
   }
 

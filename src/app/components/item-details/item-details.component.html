@@ -9,6 +9,7 @@
           placeholder="Name"
           [(ngModel)]="item.name"
           name="itemName"
+          required
         />
       </mat-form-field>
 
@@ -28,7 +29,7 @@
       <br />
       <mat-form-field class="example-full-width">
         <mat-label>Select a Type</mat-label>
-        <mat-select [(value)]="item.type">
+        <mat-select [(value)]="item.type" required>
           <mat-option
             *ngFor="let itemType of itemTypes"
             [value]="itemType.id"
