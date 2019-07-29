@@ -1,4 +1,4 @@
-# AngularStarterKit
+# Angular Starter Kit
 
 A project to get started with Angular Material, ag-grid and Angular 8.
 
