@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ItemDetailsComponent } from "../item-details/item-details.component";
 import { ApiService } from "src/app/services/api.service";
 import { MatDialog, MatSnackBar } from "@angular/material";
+import { __await } from 'tslib';
 
 @Component({
   selector: "app-items",
@@ -21,15 +22,32 @@ export class ItemsComponent implements OnInit {
       checkboxSelection: true,
       headerCheckboxSelection: true
     },
-    { headerName: "Date", field: "date" },
+    {
+      headerName: "Date",
+      field: "date",
+      cellRenderer: data => {
+        return data.value ? new Date(data.value).toLocaleDateString() : "";
+      }
+    },
     { headerName: "Price", field: "price" },
     { headerName: "InStock", field: "inStock" },
-    { headerName: "Type", field: "type" }
+    {
+      headerName: "Type",
+      field: "type",
+      cellRenderer: data => {
+        console.log(data);
+        console.log(this.itemTypes);
+        //let index=
+        return data.value ? this.itemTypes.find( itemtype=> itemtype.id == data.value).name : "";
+      }
+    }
   ];
 
   rowData;
 
   gridApi;
+
+  itemTypes;
 
   pleaseSelectASingleRecordMessage: string =
     "Please select a single record to perform this operation.";
@@ -50,6 +68,7 @@ export class ItemsComponent implements OnInit {
 
   async loadData() {
     this.rowData = await this.apiService.getAllItems();
+    this.itemTypes= await this.apiService.getItemTypes();
     console.log(this.rowData);
   }
 
@@ -86,9 +105,21 @@ export class ItemsComponent implements OnInit {
   }
 
   showItemDetails(itemId) {
-    this.dialog.open(ItemDetailsComponent, {
+    let dialogRef = this.dialog.open(ItemDetailsComponent, {
       data: {
         itemId: itemId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`); // Pizza!
+      console.log(result);
+      if (result !== undefined) {
+        if (result.mode === "add") {
+          this.gridApi.updateRowData({ add: [result.item] });
+        } else {
+          this.gridApi.updateRowData({ update: [result.item] });
+        }
       }
     });
   }

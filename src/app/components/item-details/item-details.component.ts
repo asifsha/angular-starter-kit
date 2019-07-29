@@ -1,9 +1,9 @@
 import {
   Component,
   OnInit,
-  Input,
-  AfterContentInit,
-  Inject
+   Inject,
+   Output,
+   EventEmitter
 } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from "@angular/material";
@@ -15,6 +15,9 @@ import { CustomSnakebarComponent } from '../custom-snakebar/custom-snakebar.comp
   styleUrls: ["./item-details.component.less"]
 })
 export class ItemDetailsComponent implements OnInit {
+
+  @Output() itemSaved = new EventEmitter();
+
   item;
   itemTypes;
   heading;
@@ -55,7 +58,8 @@ export class ItemDetailsComponent implements OnInit {
     console.log(this.item);
     if (this.validateItem()) {
       this.apiService.saveItem(this.item);
-      this.dialogRef.close();
+      this.itemSaved.emit(this.item);
+      this.dialogRef.close({mode: this.data.itemId === -1 ? 'add' : 'update', item : this.item});
     }
   }
 
@@ -67,6 +71,7 @@ export class ItemDetailsComponent implements OnInit {
     if (this.item.type === undefined || this.item.type === 0) {
       message += "<br> Please select a type.";
     }
+    if(message!=='')
     this.openSnackBar(message, undefined);
 
     return message === "";

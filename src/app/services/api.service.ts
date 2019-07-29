@@ -201,6 +201,8 @@ export class ApiService {
         this.items[index] = Object.assign({}, itemRecord);
       }
 
+      console.log('items list');
+      console.log(this.items);
       resolve(itemRecord);
     });
   }
